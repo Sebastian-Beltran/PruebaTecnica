@@ -14,10 +14,12 @@ class UserController extends Controller
      */
     public function index(User $user)
     {
-        $users = User::orderBy('id', 'ASC')->paginate(5);
+        $users = User::orderBy('id', 'ASC')->get();
+        // $users = User::all();
 
         // return $users;
-        return view('users.index', compact('users'));
+        return response()->json($users);
+        // return view('users.index', compact('users'));
     }
 
     /**
@@ -65,8 +67,16 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
-    {
-        return view('users.show', compact('user'));
+    {   
+
+        return response()->json($user);
+        // return view('users.show', compact('usuario'));
+    }
+    public function dd(User $user)
+    {   
+
+        $usuario = response()->json($user);
+        return view('users.show', compact('usuario'));
     }
 
     /**
